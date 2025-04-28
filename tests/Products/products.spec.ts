@@ -3,7 +3,7 @@ import { productsFunc } from "../../pages/Products/BusinessKeywords/productFunc"
 
 test("Products Category Validation", async ({ page }) => {
 
-    // await page.goto(String(process.env.STORE_URL));
+    //await page.goto(String(process.env.STORE_URL));
     await page.goto("https://automationteststore.com/");
     await page.waitForLoadState('networkidle');
 

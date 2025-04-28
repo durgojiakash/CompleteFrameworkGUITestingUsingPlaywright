@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 require('dotenv').config();
 
 /**
@@ -29,7 +29,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     //baseURL: 'https://automationteststore.com',
     baseURL: process.env.BASE_URL, 
-    storageState: 'loginCredentials.json',
+    storageState: './auth/loginCredentials.json',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'off',
@@ -44,11 +44,26 @@ export default defineConfig({
     {
       name: 'loginSetup',
       testMatch: /.*setup\.spec\.ts/,
+      use : {
+        ...devices["Desktop Chrome"],
+      }
 
     },
     {
-      name: 'e2e',
+      name: 'e2e-chrome',
       dependencies: ['loginSetup'],
+      use : {
+        ...devices['Desktop Chrome'],
+      },
+      testMatch: 'spec.ts',
+      grepInvert: /@setup/,
+    },
+    {
+      name: 'e2e-firefox',
+      dependencies: ['loginSetup'],
+      use : {
+        ...devices['Desktop Firefox'],
+      },
       testMatch: 'spec.ts',
       grepInvert: /@setup/,
     },
