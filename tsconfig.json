@@ -9,5 +9,5 @@
     },
     "include": [
       "tests/**/*.ts"  // Adjust this path based on where your test files are
-    ]
+, "pages/Base/BusinessKeywords/baseFunc.ts"    ]
   }
